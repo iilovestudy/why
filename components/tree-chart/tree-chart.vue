@@ -10,12 +10,12 @@
 						<view class="vertical-line" v-if="!isRoot">
 							<!-- 用户信息 -->
 							<view class="user-info" @tap="itemClick">
-								<image class="user-avatar" src="" mode=""></image>
+								<image class="user-avatar" src="/static/img/icon_default_man.png" mode=""></image>
 								<view :class="[dataSource.isself ? 'user-self':'user-name']">
 									<view class="user-name-text">
 										{{dataSource.username}}
 									</view>
-									<image class="user-sex" src="" mode=""></image>
+									<image class="user-sex" src="/static/img/icon_default_man.png" mode=""></image>
 								</view>
 							</view>
 							<!-- 如果当前节点有儿子 有妻子 在节点下方画一条垂直的线 -->
@@ -30,10 +30,10 @@
 							<view class="vertical-line" style="background-color:rgba(0,0,0,0)" v-if="!isRoot"></view>
 							<!-- 用户信息 -->
 							<view class="user-info" @tap="itemClick">
-								<image class="user-avatar" src="" mode=""></image>
+								<image class="user-avatar" src="/static/img/icon_default_man.png" mode=""></image>
 								<view class="user-name">
 									<view class="user-name-text">{{dataSource.wife.username}}</view>
-									<image class="user-sex" src="" mode=""></image>
+									<image class="user-sex" src="/static/img/icon_default_man.png" mode=""></image>
 								</view>
 							</view>
 							<!-- 如果当前节点有儿子 在配偶下方画一条垂直的线 -->
@@ -68,6 +68,7 @@
 
 <script>
 	export default {
+		name:'treeChart',
 		props:{
 			dataSource:{
 				type:Object
@@ -83,6 +84,13 @@
 			return {
 
 			};
+		},
+		methods:{
+			itemClick(){
+				uni.showModal({
+					title:'哈哈哈'
+				})
+			}
 		}
 	}
 </script>

@@ -17,6 +17,9 @@
 				{{familyHeaderInfo.family_desc}}
 			</view>
 		</view>
+		<view class="add-member-btn">
+			新增成员
+		</view>
 		<view class="family-items">
 			<view class="family-item" v-for="(item,index) in memberList" :key="index">
 				<view class="member-avatar">
@@ -125,7 +128,7 @@
 	/* 家族描述 */
 	.family-desc{
 		height: 140upx;
-		margin: 0 10upx 0 10upx;
+		margin: 0 10upx 100upx 10upx;
 		padding: 20upx 60upx 20upx 60upx;
 		border: 1upx solid #dedede;
 		overflow: scroll;
@@ -133,7 +136,23 @@
 	.family-desc-title{
 		font-size: 35upx;
 	}
+	.add-member-btn{
+		border-radius: 80upx;
+		position: absolute;
+		right: 10upx;
+		border: 1px solid black;
+		right: 10upx;
+		top: 390upx;
+		height: 80upx;
+		width: 80upx;
+		text-align: center;
+		line-height: 40upx;
+		font-size: 30upx;
+	}
 	/* 家族成员 */
+	.add-member-btn{
+
+	}
 	.family-item{
 		height: 140upx;
 		margin: 20upx 10upx 20upx 10upx;
