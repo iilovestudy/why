@@ -7,58 +7,57 @@
 				 	<!-- 有妻子 有儿子的情况下 给当前节点添加22.5rpx的右侧内边距-->
 					<view class="user-container" :style="{'padding-right':(dataSource.wife && dataSource.children) ? '22.5rpx':'0'}">
 						<!-- 每个子节点头部画一个垂直的线  根节点除外 -->
-						<view class="vertical-line" v-if="!isRoot">
-							<!-- 用户信息 -->
-							<view class="user-info" @tap="itemClick">
-								<image class="user-avatar" src="/static/img/icon_default_man.png" mode=""></image>
-								<view :class="[dataSource.isself ? 'user-self':'user-name']">
-									<view class="user-name-text">
-										{{dataSource.username}}
-									</view>
-									<image class="user-sex" src="/static/img/icon_default_man.png" mode=""></image>
+						<view class="vertical-line" v-if="!isRoot"/>
+						<!-- 用户信息 -->
+						<view class="user-info" @tap="itemClick">
+							<image class="user-avatar" :src="dataSource.isBind ? dataSource.thumb : dataSource.gender == 1 ? '/static/img/icon_default_woman.png' : '/static/img/icon_default_man.png'" mode=""></image>
+							<view :class="[dataSource.isself ? 'user-self':'user-name']">
+								<view class="user-name-text">
+									{{dataSource.username}}
 								</view>
+								<image class="user-sex" :src="dataSource.gender == 1 ? '/static/img/icon_sex_woman.png' : '/static/img/icon_sex_man.png'" mode=""></image>
 							</view>
-							<!-- 如果当前节点有儿子 有妻子 在节点下方画一条垂直的线 -->
-							<view class="vertical-line" v-if="dataSource.children && dataSource.wife"></view>
 						</view>
-						<!-- 处理配偶 -->
-						<!-- 如果有配偶 没儿子  则画一根水平线关联夫妻关系 -->
-						<view class="horizontal-line" style="width:35rpx;margin-left:5rpx;margin-right:5rpx;" v-if="!dataSource.children && dataSource.wife"></view>
-						<!-- 有妻子 没有儿子的情况下 给当前配偶节点添加22.5rpx的左侧内边距-->
-						<view class="user-container" :style="{'padding-left':dataSource.wife && dataSource.children?'22.5rpx':'0'}">
-							<!-- 每个子节点头部画一个垂直的线 由于是配偶  要透明处理 -->
-							<view class="vertical-line" style="background-color:rgba(0,0,0,0)" v-if="!isRoot"></view>
-							<!-- 用户信息 -->
-							<view class="user-info" @tap="itemClick">
-								<image class="user-avatar" src="/static/img/icon_default_man.png" mode=""></image>
-								<view class="user-name">
-									<view class="user-name-text">{{dataSource.wife.username}}</view>
-									<image class="user-sex" src="/static/img/icon_default_man.png" mode=""></image>
-								</view>
-							</view>
-							<!-- 如果当前节点有儿子 在配偶下方画一条垂直的线 -->
-							<view class="vertical-line" v-if="dataSource.children"></view>
-						</view>
+						<!-- 如果当前节点有儿子 有妻子 在节点下方画一条垂直的线 -->
+						<view class="vertical-line" v-if="dataSource.children && dataSource.wife" />
 					</view>
-					<!-- 如果当前节点有儿子并且有配偶 在夫妻下方画一条水平的线 并设置左下 右下圆角 -->
-					<view class="horizontal-line left-bottom-radius right-bottom-radius" v-if="dataSource.children && dataSource.wife"></view>
-				</view>
-				<!-- 有多个儿子 先要画一条垂直的线 再画一条水平的线 -->
-				<view v-if="dataSource.children.length > 1" class="vertical-line" />
-				<!-- 渲染子节点 如果他的下级最后一个子节点有配偶 则下级的整个布局向右移动144rpx -->
-				<view class="children-container" :style="{'margin-left':dataSource.children[dataSource.children.length-1].wife?'144rpx':'0'}" v-if="dataSource.children">
-					<view class="" v-for="(item,index) in dataSource.children" :key="index">
-						<view class="children-super">
-							<view class="" v-if="dataSource.children.length > 1">
-								<!-- 第一个的情况 -->
-								<view v-if="index == 0" :class="[item.wife?'horizontal-line left-top-radius first-wife-line':'horizontal-line left-top-radius first-line']" />
-								<!-- 最后一个 -->
-								<view v-else-if="index == dataSource.children.length-1" :class="[item.wife?'horizontal-line right-top-radius last-wife-line':'horizontal-line right-top-radius last-line']" />
-								<!-- 中间的 -->
-								<view v-else class="horizontal-line" style="width:100%" />
+					<!-- 处理配偶 -->
+					<!-- 如果有配偶 没儿子  则画一根水平线关联夫妻关系 -->
+					<view class="horizontal-line" style="width:35rpx;margin-left:5rpx;margin-right:5rpx;" v-if="!dataSource.children && dataSource.wife"></view>
+					<!-- 有妻子 没有儿子的情况下 给当前配偶节点添加22.5rpx的左侧内边距-->
+					<view class="user-container" :style="{'padding-left':dataSource.wife && dataSource.children?'22.5rpx':'0'}">
+						<!-- 每个子节点头部画一个垂直的线 由于是配偶  要透明处理 -->
+						<view class="vertical-line" style="background-color:rgba(0,0,0,0)" v-if="!isRoot"></view>
+						<!-- 用户信息 -->
+						<view class="user-info" @tap="itemClick">
+							<image class="user-avatar" :src="dataSource.wife.isBind ? dataSource.wife.thumb : dataSource.wife.gender == 1 ? '/static/img/icon_default_woman.png' : '/static/img/icon_default_man.png'" mode=""></image>
+							<view class="user-name">
+								<view class="user-name-text">{{dataSource.wife.username}}</view>
+								<image class="user-sex" :src="dataSource.wife.gender == 1 ? '/static/img/icon_sex_woman.png' : '/static/img/icon_sex_man.png'" mode=""></image>
 							</view>
-							<tree-chart :dataSource="item" />
 						</view>
+						<!-- 如果当前节点有儿子 在配偶下方画一条垂直的线 -->
+						<view class="vertical-line" v-if="dataSource.children"></view>
+					</view>
+				</view>
+				<!-- 如果当前节点有儿子并且有配偶 在夫妻下方画一条水平的线 并设置左下 右下圆角 -->
+				<view class="horizontal-line left-bottom-radius right-bottom-radius" v-if="dataSource.children && dataSource.wife"></view>
+			</view>
+			<!-- 有多个儿子 先要画一条垂直的线 再画一条水平的线 -->
+			<view v-if="dataSource.children.length > 1" class="vertical-line"></view>
+			<!-- 渲染子节点 如果他的下级最后一个子节点有配偶 则下级的整个布局向右移动144rpx -->
+			<view class="children-container" :style="{'margin-left':dataSource.children[dataSource.children.length-1].wife?'144rpx':'0'}" v-if="dataSource.children">
+				<view class="" v-for="(item,index) in dataSource.children" :key="index">
+					<view class="children-super">
+						<view class="" v-if="dataSource.children.length > 1">
+							<!-- 第一个的情况 -->
+							<view v-if="index == 0" :class="[item.wife?'horizontal-line left-top-radius first-wife-line':'horizontal-line left-top-radius first-line']" />
+							<!-- 最后一个 -->
+							<view v-else-if="index == dataSource.children.length-1" :class="[item.wife?'horizontal-line right-top-radius last-wife-line':'horizontal-line right-top-radius last-line']" />
+							<!-- 中间的 -->
+							<view v-else class="horizontal-line" style="width:100%" />
+						</view>
+						<tree-chart :dataSource="item"></tree-chart>
 					</view>
 				</view>
 			</view>
@@ -67,8 +66,12 @@
 </template>
 
 <script>
+	import treeChart from './tree-chart.vue'
 	export default {
 		name:'treeChart',
+		components:{
+			treeChart
+		},
 		props:{
 			dataSource:{
 				type:Object
@@ -78,7 +81,7 @@
 			}
 		},
 		mounted() {
-
+			console.log("this.dataSource: ",this.dataSource);
 		},
 		data() {
 			return {

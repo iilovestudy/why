@@ -1,16 +1,4 @@
 {
-	"leftWindow": {
-		"path": "windows/left-window.vue",
-		"style": {
-			"width": "350px"
-		}
-	},
-	"topWindow": {
-		"path": "windows/top-window.vue",
-		"style": {
-			"height": "60px"
-		}
-	},
 	"pages": [
 		// pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
@@ -26,7 +14,16 @@
             "path" : "pages/family_details/family_details",
             "style" :
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "家族详情",
+                "enablePullDownRefresh": false
+            }
+
+        }
+        ,{
+            "path" : "pages/add_member/add_member",
+            "style" :
+            {
+                "navigationBarTitleText": "添加成员",
                 "enablePullDownRefresh": false
             }
 
@@ -39,15 +36,7 @@
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8",
 		"backgroundColorTop": "#F4F5F6",
-		"backgroundColorBottom": "#F4F5F6",
-		"mp-360": {
-			"navigationStyle": "custom"
-		},
-		"h5": {
-			"maxWidth": 1190,
-			"navigationBarTextStyle": "black",
-			"navigationBarBackgroundColor": "#F1F1F1"
-		}
+		"backgroundColorBottom": "#F4F5F6"
 
 	}
 }

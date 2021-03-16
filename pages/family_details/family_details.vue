@@ -17,7 +17,7 @@
 				{{familyHeaderInfo.family_desc}}
 			</view>
 		</view>
-		<view class="add-member-btn">
+		<view class="add-member-btn" @click="add_member">
 			新增成员
 		</view>
 		<view class="family-items">
@@ -99,6 +99,11 @@
 						member_relationship:'尼赵四'
 					}
 				]
+			},
+			add_member(){
+				uni.navigateTo({
+					url:'../add_member/add_member'
+				})
 			}
 		}
 	}
@@ -137,16 +142,16 @@
 		font-size: 35upx;
 	}
 	.add-member-btn{
-		border-radius: 80upx;
+		border-radius: 10upx;
 		position: absolute;
 		right: 10upx;
-		border: 1px solid black;
+		border: 1px solid #b1b1b1;
 		right: 10upx;
 		top: 390upx;
 		height: 80upx;
-		width: 80upx;
+		width: 180upx;
 		text-align: center;
-		line-height: 40upx;
+		line-height: 80upx;
 		font-size: 30upx;
 	}
 	/* 家族成员 */

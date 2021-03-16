@@ -14,13 +14,11 @@
 				{{item.value}}
 			</view>
 		</view>
-		<view class="">
-			<movable-area>
-				<movable-view id="rootTree" scale direction="all" :style="{'width':(width == 0) ? 'auto' : width + 'px;','height':(height == 0) ? 'auto' : height + 'px;'}" :x="-width/2+windowWidth/2">
-					<tree-chart :dataSourse="dataSourse" :isRoot="true" ></tree-chart>
-				</movable-view>
-			</movable-area>
-		</view>
+		<movable-area>
+			<movable-view id="rootTree" scale direction="all" :style="{'width':(width == 0) ? 'auto' : width + 'px;','height':(height == 0) ? 'auto' : height + 'px;'}" :x="-width/2+windowWidth/2">
+				<tree-chart :dataSource="dataSource" :isRoot="true" ></tree-chart>
+			</movable-view>
+		</movable-area>
 		<view class="person-message" v-show="isShowPersonMessage">
 			<view class="message-title">
 				<view class="message-title-icon">
@@ -51,7 +49,7 @@
 			return {
 				familyId:'',
 				isShowPersonMessage:false,
-				dataSource:'',
+				dataSource:{},
 				width: 0,
 				height: 0,
 				windowWidt:0,
@@ -77,9 +75,6 @@
 			}
 		},
 		onLoad() {
-
-		},
-		onReady() {
 			let that = this
 			let winInfo = uni.getSystemInfo({
 				success: function(res) {
@@ -88,6 +83,9 @@
 					that.getDataSource()
 				}
 			});
+		},
+		onReady() {
+
 		},
 		onShow() {
 
@@ -110,7 +108,6 @@
 						that.height = data.height > that.windowHeight ? data.height : that.windowHeight
 					}).exec();
 				}
-				console.log("this.dataSource: ",this.dataSource);
 			},
 			showSelections(){
 				this.isShowSelections = !this.isShowSelections
@@ -126,7 +123,6 @@
 <style>
 	page{
 	  background-color: #753636;
-
 	}
 	movable-area{
 	  overflow: hidden;
