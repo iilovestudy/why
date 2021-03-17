@@ -14,8 +14,8 @@
 				{{item.value}}
 			</view>
 		</view>
-		<movable-area>
-			<movable-view id="rootTree" scale direction="all" :style="{'width':(width == 0) ? 'auto' : width + 'px;','height':(height == 0) ? 'auto' : height + 'px;'}" :x="-width/2+windowWidth/2">
+		<movable-area v-if="dataSource" style="height: 100vh;">
+			<movable-view id="rootTree" scale direction="all" :style="{width:myWidth == 0 ? 'auto' : myWidth + 'px',height:myHeight == 0 ? 'auto' : myHeight + 'px'}" :x="-myWidth/2 + windowWidth/2">
 				<tree-chart :dataSource="dataSource" :isRoot="true" ></tree-chart>
 			</movable-view>
 		</movable-area>
@@ -50,9 +50,9 @@
 				familyId:'',
 				isShowPersonMessage:false,
 				dataSource:{},
-				width: 0,
-				height: 0,
-				windowWidt:0,
+				myWidth: 0,
+				myHeight: 0,
+				windowWidth:0,
 				windowHeight:0,
 				isShowSelections:false,
 				selectFamily:{
@@ -75,6 +75,9 @@
 			}
 		},
 		onLoad() {
+
+		},
+		onReady() {
 			let that = this
 			let winInfo = uni.getSystemInfo({
 				success: function(res) {
@@ -83,9 +86,6 @@
 					that.getDataSource()
 				}
 			});
-		},
-		onReady() {
-
 		},
 		onShow() {
 
@@ -102,11 +102,14 @@
 				if (this.dataSource) {
 					///渲染完成后获取子组件大小重新设置宽高
 					let that = this
-					const query = uni.createSelectorQuery().in(that);
-					query.select('#rootTree').boundingClientRect(data => {
-						that.width = data.width > that.windowWidth ? data.width : that.windowWidth
-						that.height = data.height > that.windowHeight ? data.height : that.windowHeight
-					}).exec();
+					this.$nextTick(function(){
+						const query = uni.createSelectorQuery().in(that);
+						query.select('#rootTree').boundingClientRect(data => {
+							that.myWidth = data.width > that.windowWidth ? data.width : that.windowWidth
+							that.myHeight = data.height > that.windowHeight ? data.height : that.windowHeight
+						}).exec();
+					})
+
 				}
 			},
 			showSelections(){
@@ -115,6 +118,9 @@
 			selectItem(item,index){
 				this.isShowSelections = false
 				this.selectFamily = item
+			},
+			hideMask(){
+				this.isShowSelections = false
 			}
 		}
 	}
@@ -127,7 +133,6 @@
 	movable-area{
 	  overflow: hidden;
 	  width: 100vw;
-	  height: 100vh;
 	}
 
 	movable-view {
@@ -139,45 +144,45 @@
 	.top-btn{
 		display: flex;
 		justify-content: space-between;
-		margin: 10upx 10upx 0 10upx;
+		margin: 10rpx 10rpx 0 10rpx;
 	}
 
 	.select-family{
-		width: 250upx;
-		height: 80upx;
-		border-radius: 10upx;
+		width: 250rpx;
+		height: 80rpx;
+		border-radius: 10rpx;
 		text-align: center;
-		line-height: 80upx;
+		line-height: 80rpx;
 		background: white;
 	}
 	.down-icon{
-		width: 20upx;
-		height: 10upx;
-		margin-left: 60upx;
+		width: 20rpx;
+		height: 10rpx;
+		margin-left: 60rpx;
 	}
 	.select-list{
 		position: absolute;
 		z-index: 999;
-		max-height: 500upx;
-		width: 250upx;
-		border-radius: 10upx;
+		max-height: 500rpx;
+		width: 250rpx;
+		border-radius: 10rpx;
 		background: white;
-		margin: 0 10upx 10upx 10upx;
-		border: 1upx solid #8c8c8c;
+		margin: 0 10rpx 10rpx 10rpx;
+		border: 1rpx solid #8c8c8c;
 		overflow: scroll;
 	}
 	.select-item{
-		height: 80upx;
-		line-height: 80upx;
+		height: 80rpx;
+		line-height: 80rpx;
 		text-align: center;
-		margin-left: 20upx;
-		width: 200upx;
-		border-bottom: 1upx solid #8c8c8c;
+		margin-left: 20rpx;
+		width: 200rpx;
+		border-bottom: 1rpx solid #8c8c8c;
 	}
 
 	.person-message{
 		width: 100%;
-		height: 200upx;
+		height: 200rpx;
 		background: #ffaa7f;
 		color: #333333;
 		display: flex;
@@ -185,8 +190,8 @@
 		flex-wrap: wrap;
 	}
 	.message-title-icon{
-		height: 50upx;
-		width: 50upx;
+		height: 50rpx;
+		width: 50rpx;
 	}
 	.message-title-icon image{
 		width: 100%;
@@ -194,8 +199,8 @@
 		border-radius: 50%;
 	}
 	.person-avatar{
-		height: 110upx;
-		width: 110upx;
+		height: 110rpx;
+		width: 110rpx;
 	}
 	.person-avatar image{
 		width: 100%;
@@ -203,8 +208,8 @@
 		border-radius: 50%;
 	}
 	.pencel-icon{
-		height: 50upx;
-		width: 50upx;
+		height: 50rpx;
+		width: 50rpx;
 	}
 	.pencel-icon image{
 		width: 100%;

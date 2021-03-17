@@ -2,16 +2,16 @@
 	<view>
 		<view class="tree-container">
 			<view class="user-super-container">
-				 <!-- 画当前节点 -->
-				 <view class="user-wife-container">
+				<!-- 画当前节点 -->
+				<view class="user-wife-container">
 				 	<!-- 有妻子 有儿子的情况下 给当前节点添加22.5rpx的右侧内边距-->
 					<view class="user-container" :style="{'padding-right':(dataSource.wife && dataSource.children) ? '22.5rpx':'0'}">
 						<!-- 每个子节点头部画一个垂直的线  根节点除外 -->
-						<view class="vertical-line" v-if="!isRoot"/>
+						<view class="vertical-line" v-if="!isRoot"></view>
 						<!-- 用户信息 -->
-						<view class="user-info" @tap="itemClick">
+						<view class="user-info" @tap="itemClick(dataSource.username)">
 							<image class="user-avatar" :src="dataSource.isBind ? dataSource.thumb : dataSource.gender == 1 ? '/static/img/icon_default_woman.png' : '/static/img/icon_default_man.png'" mode=""></image>
-							<view :class="[dataSource.isself ? 'user-self':'user-name']">
+							<view class="user-name" :class="[dataSource.isself ? 'user-self':'']">
 								<view class="user-name-text">
 									{{dataSource.username}}
 								</view>
@@ -25,11 +25,11 @@
 					<!-- 如果有配偶 没儿子  则画一根水平线关联夫妻关系 -->
 					<view class="horizontal-line" style="width:35rpx;margin-left:5rpx;margin-right:5rpx;" v-if="!dataSource.children && dataSource.wife"></view>
 					<!-- 有妻子 没有儿子的情况下 给当前配偶节点添加22.5rpx的左侧内边距-->
-					<view class="user-container" :style="{'padding-left':dataSource.wife && dataSource.children?'22.5rpx':'0'}">
+					<view v-if="dataSource.wife" class="user-container" :style="{'padding-left':dataSource.wife && dataSource.children?'22.5rpx':'0'}">
 						<!-- 每个子节点头部画一个垂直的线 由于是配偶  要透明处理 -->
 						<view class="vertical-line" style="background-color:rgba(0,0,0,0)" v-if="!isRoot"></view>
 						<!-- 用户信息 -->
-						<view class="user-info" @tap="itemClick">
+						<view class="user-info" @tap="itemClick(dataSource.wife.username)">
 							<image class="user-avatar" :src="dataSource.wife.isBind ? dataSource.wife.thumb : dataSource.wife.gender == 1 ? '/static/img/icon_default_woman.png' : '/static/img/icon_default_man.png'" mode=""></image>
 							<view class="user-name">
 								<view class="user-name-text">{{dataSource.wife.username}}</view>
@@ -46,20 +46,20 @@
 			<!-- 有多个儿子 先要画一条垂直的线 再画一条水平的线 -->
 			<view v-if="dataSource.children.length > 1" class="vertical-line"></view>
 			<!-- 渲染子节点 如果他的下级最后一个子节点有配偶 则下级的整个布局向右移动144rpx -->
-			<view class="children-container" :style="{'margin-left':dataSource.children[dataSource.children.length-1].wife?'144rpx':'0'}" v-if="dataSource.children">
-				<view class="" v-for="(item,index) in dataSource.children" :key="index">
+			<view class="children-container" :style="{'margin-left':(dataSource.children[dataSource.children.length-1].wife)?'144rpx':'0'}" v-if="dataSource.children">
+				<block v-for="(item,index) in dataSource.children" :key="index">
 					<view class="children-super">
-						<view class="" v-if="dataSource.children.length > 1">
+						<block class="" v-if="dataSource.children.length > 1">
 							<!-- 第一个的情况 -->
-							<view v-if="index == 0" :class="[item.wife?'horizontal-line left-top-radius first-wife-line':'horizontal-line left-top-radius first-line']" />
+							<view v-if="index == 0" class="horizontal-line left-top-radius" :class="[item.wife?'first-wife-line':'first-line']"></view>
 							<!-- 最后一个 -->
-							<view v-else-if="index == dataSource.children.length-1" :class="[item.wife?'horizontal-line right-top-radius last-wife-line':'horizontal-line right-top-radius last-line']" />
+							<view v-else-if="index == (dataSource.children.length-1)" class="horizontal-line right-top-radius" :class="[item.wife?'last-wife-line':'last-line']"></view>
 							<!-- 中间的 -->
-							<view v-else class="horizontal-line" style="width:100%" />
-						</view>
+							<view v-else class="horizontal-line" style="width:100%"></view>
+						</block>
 						<tree-chart :dataSource="item"></tree-chart>
 					</view>
-				</view>
+				</block>
 			</view>
 		</view>
 	</view>
@@ -89,9 +89,9 @@
 			};
 		},
 		methods:{
-			itemClick(){
+			itemClick(name){
 				uni.showModal({
-					title:'哈哈哈'
+					title:name
 				})
 			}
 		}
