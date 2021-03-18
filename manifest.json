@@ -74,6 +74,15 @@
             "sdkConfigs" : {
                 "speech" : {
                     "ifly" : {}
+                },
+                "oauth" : {
+                    "univerify" : {}
+                },
+                "share" : {
+                    "weixin" : {
+                        "appid" : "",
+                        "UniversalLinks" : ""
+                    }
                 }
             },
             "orientation" : [ "portrait-primary" ]

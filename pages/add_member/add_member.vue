@@ -29,6 +29,15 @@
 					<image src="../../static/img/mine_next.png" mode=""></image>
 				</view>
 			</view>
+			<view class="title_item" @tap="show_relation_mask">
+				<view class="title_text">
+					关系
+				</view>
+				<view class="title_detail">
+					{{relation_show.value}}
+					<image src="../../static/img/mine_next.png" mode=""></image>
+				</view>
+			</view>
 		</view>
 		<view class="mask" @tap="hide_mask" v-show="sex_mask">
 			<view class="time_mask">
@@ -42,6 +51,23 @@
 				</view>
 				<view class="max_height">
 					<view class="time_date" v-for="(item,index) in sex_list" :key='index' @tap.stop="sex_choose(item,index)">
+						{{item.value}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="mask" @tap="hide_mask" v-show="relation_mask">
+			<view class="time_mask">
+				<view class="time_submit">
+					<view class="font_weight">
+						选择关系
+					</view>
+					<view class="">
+						<!-- 确定 -->
+					</view>
+				</view>
+				<view class="max_height">
+					<view class="time_date" v-for="(item,index) in relation_list" :key='index' @tap.stop="relation_choose(item,index)">
 						{{item.value}}
 					</view>
 				</view>
@@ -97,6 +123,18 @@
 					key:'woman',
 					value:'女'
 				},
+				relation_mask:false,
+				relation_list:[{
+					key:'parent',
+					value:'父母',
+				},{
+					key:'child',
+					value:'孩子',
+				}],
+				relation_show:{
+					key:'child',
+					value:'孩子',
+				},
 				member_name:'',
 			}
 		},
@@ -116,10 +154,17 @@
 				this.sex_mask = true
 			},
 			/**
+			 * @description 显示关系弹窗
+			 */
+			show_relation_mask(){
+				this.relation_mask = true
+			},
+			/**
 			 * @description 隐藏弹窗
 			 */
 			hide_mask(){
 				this.sex_mask = false
+				this.relation_mask = false
 			},
 			/**
 			 * @param {Object} item
@@ -131,12 +176,31 @@
 				this.sex_show = item
 			},
 			/**
+			 * @param {Object} item
+			 * @param {Object} index
+			 * @description 关系选择事件
+			 */
+			relation_choose(item,index){
+				this.relation_mask = false
+				this.relation_show = item
+			},
+			/**
 			 * @description 确认创建成员
 			 */
 			confimMember(){
-				uni.navigateBack({
-
+				uni.showModal({
+					title:'是否要分享给微信好友',
+					success: (res) => {
+						if (res.confirm) {
+							console.log('用户点击确定');
+						} else if (res.cancel) {
+							uni.navigateBack({
+								
+							})
+						}
+					}
 				})
+				
 			}
 		}
 	}

@@ -62,6 +62,9 @@
 				</block>
 			</view>
 		</view>
+		<!-- <view class="mask" v-show="add_mask">
+
+		</view> -->
 	</view>
 </template>
 
@@ -81,17 +84,37 @@
 			}
 		},
 		mounted() {
-			console.log("this.dataSource: ",this.dataSource);
+
 		},
 		data() {
 			return {
-
+				// add_mask:false,
 			};
 		},
 		methods:{
 			itemClick(name){
 				uni.showModal({
-					title:name
+					title:'当前节点是'+name,
+					cancelText:'个人信息',
+					confirmText:'添加成员',
+					success: (res) => {
+						if(res.confirm){
+							uni.navigateTo({
+								url:'../add_member/add_member'
+							})
+						}else if(res.cancel){
+							uni.showModal({
+								title:'当前节点未绑定，是否要分享给微信好友',
+								success: (res) => {
+									if (res.confirm) {
+										console.log('用户点击确定');
+									} else if (res.cancel) {
+										
+									}
+								}
+							})
+						}
+					}
 				})
 			}
 		}

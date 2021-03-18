@@ -17,9 +17,9 @@
 				{{familyHeaderInfo.family_desc}}
 			</view>
 		</view>
-		<view class="add-member-btn" @click="add_member">
+		<!-- <view class="add-member-btn" @click="add_member">
 			新增成员
-		</view>
+		</view> -->
 		<view class="family-items">
 			<view class="family-item" v-for="(item,index) in memberList" :key="index">
 				<view class="member-avatar">
