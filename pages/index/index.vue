@@ -16,7 +16,7 @@
 		</view>
 		<movable-area v-if="dataSource" style="height: 100vh;">
 			<movable-view id="rootTree" scale direction="all" :style="{width:myWidth == 0 ? 'auto' : myWidth + 'px',height:myHeight == 0 ? 'auto' : myHeight + 'px'}" :x="-myWidth/2 + windowWidth/2">
-				<tree-chart :dataSource="dataSource" :isRoot="true" ></tree-chart>
+				<tree-chart :dataSource="dataSource" :isRoot="true" @infoMask="showInfoMask"></tree-chart>
 			</movable-view>
 		</movable-area>
 		<view class="person-message" v-show="isShowPersonMessage">
@@ -40,13 +40,40 @@
 				<image src="../../static/play.png" mode=""></image>
 			</view>
 		</view>
+		<view class="mask" @tap.stop="hideMask" v-show="info_mask">
+			<view class="time_mask">
+				<view class="member-avatar">
+					<!-- <image :src="item.member_avatar" mode=""></image> -->
+					<image src="../../static/logo.png" mode=""></image>
+				</view>
+				<view class="member-item">
+					<view class="member-text">
+						姓名：{{item.member_name}}
+					</view>
+					<view class="member-text">
+						年龄：{{item.member_age}}
+					</view>
+					<view class="member-text">
+						所在地：{{item.member_location}}
+					</view>
+					<view class="member-text">
+						关系：{{item.member_relationship}}
+					</view>
+				</view>
+				<view class="share_button">
+					<button type="default" open-type="share">分享绑定好友</button>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import {ajax} from '../../common/common.js'
 	export default {
 		data() {
 			return {
+				info_mask:false,
 				familyId:'',
 				isShowPersonMessage:false,
 				dataSource:{},
@@ -72,20 +99,24 @@
 					key:'04',
 					value:'李家'
 				}],
+				share:{
+				    title:'阿巴阿巴',
+				    path:'/pages/index/index',
+				    imageUrl:'',
+				    desc:'',
+				    content:'',
+					query:{}
+				}
 			}
 		},
-		onLoad() {
+		onLoad(options) {
+			console.log("options: ",options);
 			uni.login({
 				provider:'weixin',
 				scopes:'auth_base',
 				success: (res) => {
 					console.log(res)
-					uni.getUserInfo({
-						provider:'weixin',
-						success: (res) => {
-							console.log("res: ",res);
-						}
-					})
+
 				}
 			})
 		},
@@ -100,7 +131,7 @@
 			});
 		},
 		onShow() {
-			that.getDataSource()
+			this.getDataSource()
 		},
 		methods: {
 			familyDetails(){
@@ -136,8 +167,26 @@
 				this.isShowSelections = false
 				this.selectFamily = item
 			},
+			showInfoMask(name){
+				this.share.query.name = name
+				uni.showModal({
+					title:'当前节点是'+name,
+					cancelText:'个人信息',
+					confirmText:'添加成员',
+					success: (res) => {
+						if(res.confirm){
+							uni.navigateTo({
+								url:'../add_member/add_member'
+							})
+						}else if(res.cancel){
+							this.info_mask = true
+						}
+					}
+				})
+			},
 			hideMask(){
 				this.isShowSelections = false
+				this.info_mask = false
 			}
 		}
 	}
@@ -232,5 +281,49 @@
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
+	}
+
+	.mask {
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.45);
+		position: fixed;
+		z-index: 10;
+		top: 0;
+		left: 0;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.time_mask {
+		width: 550upx;
+		height: 650upx;
+		background: #FFFFFF;
+		border-radius: 10upx;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: 34upx;
+	}
+	.member-avatar{
+		height: 110upx;
+		width: 110upx;
+		margin-bottom: 50upx;
+	}
+	.member-avatar image{
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
+	.member-text{
+		margin-bottom: 20upx;
+	}
+	.share_button{
+		width: 450upx;
+		height: 98upx;
+		border-radius: 50upx;
+		margin-top: 20upx;
 	}
 </style>

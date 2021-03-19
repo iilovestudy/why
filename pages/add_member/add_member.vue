@@ -80,6 +80,7 @@
 </template>
 
 <script>
+	import {ajax} from '../../common/common.js'
 	function getMyDate(type) {
 		const date = new Date();
 
@@ -188,17 +189,8 @@
 			 * @description 确认创建成员
 			 */
 			confimMember(){
-				uni.showModal({
-					title:'是否要分享给微信好友',
-					success: (res) => {
-						if (res.confirm) {
-							console.log('用户点击确定');
-						} else if (res.cancel) {
-							uni.navigateBack({
-								
-							})
-						}
-					}
+				uni.navigateBack({
+					
 				})
 				
 			}

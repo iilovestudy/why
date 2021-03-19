@@ -57,14 +57,11 @@
 							<!-- 中间的 -->
 							<view v-else class="horizontal-line" style="width:100%"></view>
 						</block>
-						<tree-chart :dataSource="item"></tree-chart>
+						<tree-chart :dataSource="item" @infoMask="itemClick"></tree-chart>
 					</view>
 				</block>
 			</view>
 		</view>
-		<!-- <view class="mask" v-show="add_mask">
-
-		</view> -->
 	</view>
 </template>
 
@@ -88,35 +85,13 @@
 		},
 		data() {
 			return {
-				// add_mask:false,
+				info_mask:false,
 			};
 		},
 		methods:{
 			itemClick(name){
-				uni.showModal({
-					title:'当前节点是'+name,
-					cancelText:'个人信息',
-					confirmText:'添加成员',
-					success: (res) => {
-						if(res.confirm){
-							uni.navigateTo({
-								url:'../add_member/add_member'
-							})
-						}else if(res.cancel){
-							uni.showModal({
-								title:'当前节点未绑定，是否要分享给微信好友',
-								success: (res) => {
-									if (res.confirm) {
-										console.log('用户点击确定');
-									} else if (res.cancel) {
-										
-									}
-								}
-							})
-						}
-					}
-				})
-			}
+				this.$emit('infoMask',name)
+			},
 		}
 	}
 </script>
@@ -262,5 +237,4 @@
 	  width: 125rpx;
 	  background-color: white;
 	}
-
 </style>

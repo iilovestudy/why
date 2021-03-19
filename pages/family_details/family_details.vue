@@ -50,6 +50,7 @@
 </template>
 
 <script>
+	import {ajax} from '../../common/common.js'
 	export default {
 		data() {
 			return {
