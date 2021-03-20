@@ -1,5 +1,5 @@
 
-const ApiUrl = '';
+const ApiUrl = 'https://whyjz.ltd:8080/';
 const ajax = (opt) => {
 	uni.showLoading({
 		title: '加载中',
@@ -11,13 +11,13 @@ const ajax = (opt) => {
 	opt.method = opt.method || 'GET';
 	opt.header = opt.header || {
 		"Content-Type": "application/json",
-		"version":"v010101",
-		"token":uni.getStorageSync('TOKEN')
+		// "version":"v010101",
+		// "token":uni.getStorageSync('TOKEN')
 	};
 	opt.success = opt.success || function() {
-		
+
 	};
-	
+
 	uni.request({
 		url: ApiUrl + opt.url,
 		data: opt.data,

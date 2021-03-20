@@ -1,0 +1,793 @@
+{
+	"info": {
+		"_postman_id": "9af1d69f-ff04-4ac3-9d92-e05248fcfbad",
+		"name": "bishe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LocalTest",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "新增用户",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"openId\":\"1235\",\r\n    \"name\":\"冯琴娣\",\r\n    \"birthDate\":\"100000000000\",\r\n    \"phone\":\"1348932*489\",\r\n    \"sex\":0,\r\n    \"area\":\"浙江省金华市\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8080/users",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改用户",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"openId\":\"001\",\r\n    \"name\":\"王华怿\",\r\n    \"birthDate\":\"100000000000\",\r\n    \"phone\":\"13588064845\",\r\n    \"sex\":0,\r\n    \"area\":\"浙江省金华市\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8080/users/0",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获得用户",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/users/003",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"003"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "列出用户",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/users/list/3",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"list",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "搜索用户",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/users/search/3?name=王",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"search",
+										"3"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "王"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "family",
+					"item": [
+						{
+							"name": "新增家族",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"小乌头华氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8080/families",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"families"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改家族信息",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"金华王氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8080/families/3",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"families",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获得家族列表",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"小乌头华氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8080/families/list/0",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"families",
+										"list",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除家族",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"小乌头华氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8080/families/9",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"families",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "relation",
+					"item": [
+						{
+							"name": "新增关系",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"startNodeId\":\"7\",\r\n    \"endNodeId\":\"10\",\r\n    \"type\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8080/relation",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"relation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除关系",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/relation/4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "关系用户",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/relation//info/0?itsId=11",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"",
+										"info",
+										"0"
+									],
+									"query": [
+										{
+											"key": "itsId",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用户所有关系",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/relation/all/001",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"all",
+										"001"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "家族关系",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8080/relation/all/001",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"all",
+										"001"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Test",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "新增用户",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"openId\":\"1235\",\r\n    \"name\":\"冯琴娣\",\r\n    \"birthDate\":\"100000000000\",\r\n    \"phone\":\"1348932*489\",\r\n    \"sex\":0,\r\n    \"area\":\"浙江省金华市\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://whyjz.ltd:8080/users",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改用户",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"openId\":\"001\",\r\n    \"name\":\"王华怿\",\r\n    \"birthDate\":\"100000000000\",\r\n    \"phone\":\"13588064845\",\r\n    \"sex\":0,\r\n    \"area\":\"浙江省金华市\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://whyjz.ltd:8080/users/0",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获得用户",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://whyjz.ltd:8080/users/003",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"003"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "列出用户",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://whyjz.ltd:8080/users/list/3",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"list",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "搜索用户",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://whyjz.ltd:8080/users/search/3?name=王",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"search",
+										"3"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "王"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "family",
+					"item": [
+						{
+							"name": "新增家族",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"小乌头华氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://whyjz.ltd:8080/families",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"families"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改家族信息",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"金华王氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://whyjz.ltd:8080/families/3",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"families",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获得家族列表",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"小乌头华氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://whyjz.ltd:8080/families/list/0",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"families",
+										"list",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除家族",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"小乌头华氏\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://whyjz.ltd:8080/families/9",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"families",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "relation",
+					"item": [
+						{
+							"name": "新增关系",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"startNodeId\":\"7\",\r\n    \"endNodeId\":\"10\",\r\n    \"type\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://whyjz.ltd:8080/relation",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"relation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "删除关系",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://whyjz.ltd:8080/relation/4",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "关系用户",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://whyjz.ltd:8080/relation//info/0?itsId=11",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"",
+										"info",
+										"0"
+									],
+									"query": [
+										{
+											"key": "itsId",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用户所有关系",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://whyjz.ltd:8080/relation/all/001",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"all",
+										"001"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "家族关系",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://whyjz.ltd:8080/relation/all/001",
+									"protocol": "https",
+									"host": [
+										"whyjz",
+										"ltd"
+									],
+									"port": "8080",
+									"path": [
+										"relation",
+										"all",
+										"001"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

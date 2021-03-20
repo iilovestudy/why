@@ -189,10 +189,25 @@
 			 * @description 确认创建成员
 			 */
 			confimMember(){
-				uni.navigateBack({
-					
+				ajax({
+					url:'users',
+					method:'POST',
+					data:{
+						openId:'1352',
+						name:'1',
+						birthDate:'1',
+						phone:'1',
+						sex:'1',
+						area:'1'
+					},
+					success:(res) => {
+						console.log("res: ",res);
+					}
 				})
-				
+				// uni.navigateBack({
+
+				// })
+
 			}
 		}
 	}

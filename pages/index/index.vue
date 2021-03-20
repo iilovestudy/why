@@ -40,8 +40,11 @@
 				<image src="../../static/play.png" mode=""></image>
 			</view>
 		</view>
-		<view class="mask" @tap.stop="hideMask" v-show="info_mask">
+		<view class="mask" @tap.stop="" v-show="info_mask">
 			<view class="time_mask">
+				<view class="close-icon" @tap="hideMask">
+					<image src="../../static/img/close_icon.png" mode=""></image>
+				</view>
 				<view class="member-avatar">
 					<!-- <image :src="item.member_avatar" mode=""></image> -->
 					<image src="../../static/logo.png" mode=""></image>
@@ -325,5 +328,16 @@
 		height: 98upx;
 		border-radius: 50upx;
 		margin-top: 20upx;
+	}
+	.close-icon{
+		position: relative;
+		top: 0;
+		right: -220upx;
+		width: 50upx;
+		height: 50upx;
+	}
+	.close-icon image{
+		width: 100%;
+		height: 100%;
 	}
 </style>
